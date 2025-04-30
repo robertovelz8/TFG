@@ -35,6 +35,6 @@ public class Parte {
 	
 	private String lugar;
 	
-	@OneToOne (mappedBy = "parte_id", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Sancion id_sancion;
+	@OneToOne (mappedBy = "parte", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Sancion sancion;
 }

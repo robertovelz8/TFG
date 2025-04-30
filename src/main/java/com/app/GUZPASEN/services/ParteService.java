@@ -9,6 +9,6 @@ public interface ParteService {
 	public Parte createParte (Parte parte);
 	public Parte getParteById (Long id);
 	public List<Parte> getAllPartes ();
-	public Parte updateParte (Parte parte);
+	public Parte updateParte (Long id, Parte parte);
 	public void deleteParte (Long id);
 }

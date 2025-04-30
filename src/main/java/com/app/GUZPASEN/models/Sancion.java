@@ -25,7 +25,6 @@ import lombok.NoArgsConstructor;
 public class Sancion {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private LocalDate fecha;
@@ -34,17 +33,17 @@ public class Sancion {
 
 	private String duracion;
 
-	@OneToMany(mappedBy = "id_sancion", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "sancion", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Tarea> tareas = new ArrayList<Tarea>();
 
 	@ManyToOne
-	@JoinColumn (name = "alumno_dni")
-	private Alumno alumno_sancionado;
+	@JoinColumn (name = "alumno")
+	private Alumno alumno;
 
 	@OneToOne
 	@MapsId
-	@JoinColumn(name = "parte_id")
-	private Parte parte_id;
+	@JoinColumn(name = "id")
+	private Parte parte;
 
 	public enum TipoSancion {
 		CON_EXPULSION_DENTRO, CON_EXPULSION_FUERA, SIN_EXPULSION

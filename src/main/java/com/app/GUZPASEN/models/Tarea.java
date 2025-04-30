@@ -35,8 +35,8 @@ public class Tarea {
 	private LocalDate fechaLimite;
 	
 	@ManyToOne
-	@JoinColumn (name = "sancion_id")
-	private Sancion id_sancion;
+	@JoinColumn (name = "sancion")
+	private Sancion sancion;
 	
 	public enum Estado {
 		COMPLETADA,

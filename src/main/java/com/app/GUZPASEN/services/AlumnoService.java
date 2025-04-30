@@ -9,6 +9,6 @@ public interface AlumnoService {
 	public Alumno createAlumno (Alumno alumno);
 	public Alumno getAlumnoById (String dni);
 	public List<Alumno> getAllAlumnos ();
-	public Alumno updateAlumno (Alumno alumno);
+	public Alumno updateAlumno (String dni, Alumno alumno);
 	public void deleteAlumno (String dni);
 }

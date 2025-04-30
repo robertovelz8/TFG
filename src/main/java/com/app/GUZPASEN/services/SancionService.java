@@ -9,6 +9,6 @@ public interface SancionService {
 	public Sancion createSancion (Sancion Sancion);
 	public Sancion getSancionById (Long id);
 	public List<Sancion> getAllSanciones ();
-	public Sancion updateSancion (Sancion Sancion);
+	public Sancion updateSancion (Long id, Sancion Sancion);
 	public void deleteSancion (Long id);
 }

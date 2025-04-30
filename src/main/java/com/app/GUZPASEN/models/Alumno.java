@@ -26,7 +26,7 @@ public class Alumno {
 	private String apellidos_tutor_legal;
 	private String email_tutor_legal;
 	
-	@OneToMany (mappedBy = "alumno_sancionado", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany (mappedBy = "alumno", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Sancion> sanciones = new ArrayList<Sancion>();
 	
 }

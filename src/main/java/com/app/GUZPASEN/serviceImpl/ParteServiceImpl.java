@@ -43,19 +43,19 @@ public class ParteServiceImpl implements ParteService {
 		return parteRepository.findAll();
 	}
 
-	@Override
-	public Parte updateParte(Parte parte) {
-		Parte parteEncontrado = parteRepository.findById(parte.getId())
-				.orElseThrow(() -> new ResourceNotFoundException("No se ha encontrado el parte con id: "+parte.getId()));
-		
-		parteEncontrado.setMotivo(parte.getMotivo());
-		parteEncontrado.setDescripcion(parte.getDescripcion());
-		parteEncontrado.setFecha(parte.getFecha());
-		parteEncontrado.setHora(parte.getHora());
-		parteEncontrado.setLugar(parte.getLugar());
-		
-		return parteEncontrado;
+	public Parte updateParte(Long id, Parte parte) {
+	    Parte parteEncontrado = parteRepository.findById(id)
+	        .orElseThrow(() -> new ResourceNotFoundException("No se ha encontrado el parte con id: " + id));
+
+	    if (parte.getMotivo() != null) parteEncontrado.setMotivo(parte.getMotivo());
+	    if (parte.getDescripcion() != null) parteEncontrado.setDescripcion(parte.getDescripcion());
+	    if (parte.getFecha() != null) parteEncontrado.setFecha(parte.getFecha());
+	    if (parte.getHora() != null) parteEncontrado.setHora(parte.getHora());
+	    if (parte.getLugar() != null) parteEncontrado.setLugar(parte.getLugar());
+
+	    return parteRepository.save(parteEncontrado);
 	}
+
 
 	@Override
 	public void deleteParte(Long id) {

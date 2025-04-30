@@ -33,16 +33,17 @@ public class AlumnoServiceImpl implements AlumnoService {
 	}
 
 	@Override
-	public Alumno updateAlumno(Alumno alumno) {
-		Alumno alumnoEncontrado = alumnoRepository.findById(alumno.getDni())
-				.orElseThrow(() -> new ResourceNotFoundException("No se ha encontrado el alumno con dni: "+alumno.getDni()));
-		alumnoEncontrado.setNombre(alumno.getNombre());
-		alumnoEncontrado.setApellidos(alumno.getApellidos());
-		alumnoEncontrado.setEmail_tutor_legal(alumno.getEmail_tutor_legal());
-		alumnoEncontrado.setNombre_tutor_legal(alumno.getNombre_tutor_legal());
-		alumnoEncontrado.setApellidos_tutor_legal(alumno.getApellidos_tutor_legal());
+	public Alumno updateAlumno(String dni, Alumno alumno) {
+		Alumno alumnoEncontrado = alumnoRepository.findById(dni)
+				.orElseThrow(() -> new ResourceNotFoundException("No se ha encontrado el alumno con dni: "+dni));
 		
-		return alumnoEncontrado;
+		if (alumno.getNombre() != null) alumnoEncontrado.setNombre(alumno.getNombre());
+		if (alumno.getApellidos() != null) alumnoEncontrado.setApellidos(alumno.getApellidos());
+		if (alumno.getEmail_tutor_legal() != null) alumnoEncontrado.setEmail_tutor_legal(alumno.getEmail_tutor_legal());
+		if (alumno.getNombre_tutor_legal() != null) alumnoEncontrado.setNombre_tutor_legal(alumno.getNombre_tutor_legal());
+		if (alumno.getApellidos_tutor_legal() != null) alumnoEncontrado.setApellidos_tutor_legal(alumno.getApellidos_tutor_legal());
+					
+		return alumnoRepository.save(alumnoEncontrado);
 		
 	}
 

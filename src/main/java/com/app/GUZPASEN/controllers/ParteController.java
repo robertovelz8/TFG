@@ -40,12 +40,13 @@ public class ParteController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Parte> updateParte (@RequestBody Parte parte) {
-		return new ResponseEntity<Parte>(parteServiceImpl.updateParte(parte), HttpStatus.OK);
+	public ResponseEntity<Parte> updateParte (@PathVariable Long id, @RequestBody Parte parte) {
+		return new ResponseEntity<Parte>(parteServiceImpl.updateParte(id, parte), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> deleteParte (@PathVariable Long id) {
+		parteServiceImpl.deleteParte(id);
 		return ResponseEntity.ok().build();
 	}
 
