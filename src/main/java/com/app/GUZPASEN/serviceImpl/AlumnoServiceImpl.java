@@ -3,6 +3,7 @@ package com.app.GUZPASEN.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.app.GUZPASEN.exceptions.ResourceNotFoundException;
@@ -32,6 +33,11 @@ public class AlumnoServiceImpl implements AlumnoService {
 		return alumnoRepository.findAll();
 	}
 
+	public List<Alumno> getAllAlumnosOrdenadosAlfabeticamente() {
+		Sort alumnosOrdenados = Sort.by(Sort.Direction.ASC, "apellidos", "nombre");
+		return alumnoRepository.findAll(alumnosOrdenados);
+	}
+	
 	@Override
 	public Alumno updateAlumno(String dni, Alumno alumno) {
 		Alumno alumnoEncontrado = alumnoRepository.findById(dni)

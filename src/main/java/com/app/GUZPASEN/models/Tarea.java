@@ -3,6 +3,8 @@ package com.app.GUZPASEN.models;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,11 +25,11 @@ public class Tarea {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
 	private String titulo;
 	
 	private String descripcion;
 	
+	@Enumerated(EnumType.STRING)
 	private Estado estado;
 	
 	private LocalDate fechaCreacion;
