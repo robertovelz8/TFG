@@ -1,0 +1,9 @@
+com.app.GUZPASEN
+com.app.GUZPASEN.config
+com.app.GUZPASEN.controllers
+com.app.GUZPASEN.DTOs
+com.app.GUZPASEN.exceptions
+com.app.GUZPASEN.models
+com.app.GUZPASEN.repositories
+com.app.GUZPASEN.serviceImpl
+com.app.GUZPASEN.services

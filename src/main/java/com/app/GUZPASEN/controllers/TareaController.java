@@ -48,4 +48,9 @@ public class TareaController {
 	public ResponseEntity<Void> deleteTarea (@PathVariable Long id) {
 		return ResponseEntity.ok().build();
 	}
+	
+	@GetMapping("/tareas-alumno-expulsado/{dni}")
+	public ResponseEntity<List<Tarea>> getTareasAlumnoExpulsado (@PathVariable String dni) {
+		return new ResponseEntity<List<Tarea>>(tareaServiceImpl.getTareasAlumnoExpulsado(dni), HttpStatus.OK);
+	}
 }

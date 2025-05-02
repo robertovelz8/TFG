@@ -1,4 +1,4 @@
-package com.app.GUZPASEN.services;
+package com.app.GUZPASEN.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,10 +27,8 @@ public class NotificacionServiceImpl {
         this.templateEngine = templateEngine;
     }
 
-    /**
-     * Método general para enviar correos con la plantilla `email.html`.
-     */
-    public void enviarCorreo(Notificacion notificacion, String url) {
+
+    public void enviarCorreo(Notificacion notificacion) {
         try {
             Context context = new Context();
             context.setVariable("titulo", notificacion.getTitulo());
@@ -85,4 +83,5 @@ public class NotificacionServiceImpl {
             throw new CustomException("Error al enviar el correo.");
         }
     }
+    
 }

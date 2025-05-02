@@ -102,7 +102,6 @@
 <div class="container">
     <p th:text="${cuerpo}"></p>
     <p th:if="${motivo != null and !#strings.isEmpty(motivo)}" th:text="${motivo}" class="motivo"></p>
-    <a th:if="${url != null and !#strings.isEmpty(url)}" th:href="${url}" class="button">Acceder</a>
     <p th:text="${finalMensaje}"></p>
     <p class="msjauto">Mensaje automático, no responder a este correo.</p>
 </div>
