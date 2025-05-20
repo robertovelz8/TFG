@@ -7,71 +7,59 @@ USE guzpasen;
 ALTER DATABASE guzpasen CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 SET default_storage_engine = InnoDB;
 
--- -----------------------------------------------------
--- TABLA ALUMNO - ANTONIO.
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Alumno (
-    dni BIGINT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(50) NOT NULL,
+CREATE TABLE usuario (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
-    nombre_tutor_legal VARCHAR(30),
-    apellidos_tutor_legal VARCHAR(50),
-    email_tutor_legal VARCHAR(50)
+    email VARCHAR(150) UNIQUE NOT NULL,
+    clave VARCHAR(255) NOT NULL,
+    rol ENUM('ADMINISTRADOR', 'PROFESOR', 'GESTOR_INCIDENCIAS', 'TECNICO') NOT NULL,
+    usuario_movil BOOLEAN DEFAULT FALSE
 );
 
--- -----------------------------------------------------
--- TABLA SANCION - ROBERTO V.
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Sancion (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    alumno_sancionado BIGINT NOT NULL,
-    fecha DATE NOT NULL,
-    tipo_sancion ENUM('CON_EXPULSION_DENTRO', 'CON_EXPULSION_FUERA', 'SIN_EXPULSION') NOT NULL,
-    duracion VARCHAR(100),
-    descripcion VARCHAR(200),
-    id_parte BIGINT,
-    FOREIGN KEY (alumno_sancionado) REFERENCES Alumno(dni)
+-- Tabla Alumno
+CREATE TABLE IF NOT EXISTS alumno (
+    dni VARCHAR(255) PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    apellidos VARCHAR(255) NOT NULL,
+    nombre_tutor_legal VARCHAR(255),
+    apellidos_tutor_legal VARCHAR(255),
+    email_tutor_legal VARCHAR(255)
 );
 
--- -----------------------------------------------------
--- TABLA PARTE - ANTONIO.
--- -----------------------------------------------------
-CREATE TABLE Parte (
+-- Tabla Parte
+CREATE TABLE IF NOT EXISTS parte (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    motivo VARCHAR(30),
+    motivo VARCHAR(255) NOT NULL,
     fecha DATE,
     hora TIME,
-    descripcion VARCHAR(100),
-    lugar VARCHAR (30),
-    id_sancion BIGINT,
-    FOREIGN KEY (id_sancion)
-        REFERENCES Sancion (id)
+    descripcion TEXT,
+    lugar VARCHAR(255)
 );
 
--- -----------------------------------------------------
--- ACTUALIZACION TABLA ALUMNO - ANTONIO.
--- -----------------------------------------------------
-ALTER TABLE Sancion
-ADD FOREIGN KEY (id_parte) REFERENCES Parte(id);
-
--- -----------------------------------------------------
--- TABLA TAREA - SERGIO.
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Tarea (
+-- Tabla Sancion
+CREATE TABLE IF NOT EXISTS sancion (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    titulo VARCHAR(50) NOT NULL,
-    descripcion VARCHAR(100),
-    estado ENUM('COMPLETADA', 'PENDIENTE', 'EN_PROGRESO') NOT NULL,
-    fechaCreacion DATE NOT NULL,
-    fechaLimite DATE NOT NULL,
-    id_sancion BIGINT NOT NULL,
-    FOREIGN KEY (id_sancion) REFERENCES Sancion(id)
+    fecha DATE,
+    tipo_sancion ENUM('CON_EXPULSION_DENTRO', 'CON_EXPULSION_FUERA', 'SIN_EXPULSION'),
+    duracion VARCHAR(255),
+    alumno VARCHAR(255),
+    CONSTRAINT fk_sancion_alumno FOREIGN KEY (alumno) REFERENCES alumno(dni)
 );
 
-GRANT ALL PRIVILEGES ON guzpasen.* TO 'roberto'@'localhost';
+-- Tabla Tarea
+CREATE TABLE IF NOT EXISTS tarea (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    estado ENUM('COMPLETADA', 'EN_PROGRESO', 'PENDIENTE'),
+    fecha_creacion DATE,
+    fecha_limite DATE,
+    sancion BIGINT,
+    CONSTRAINT fk_tarea_sancion FOREIGN KEY (sancion) REFERENCES sancion(id)
+);
+
+
+CREATE USER IF NOT EXISTS 'roberto'@'localhost' IDENTIFIED BY 'dam1';
+GRANT ALL PRIVILEGES ON *.* TO 'roberto'@'localhost';
 FLUSH PRIVILEGES;
-
-
-
-
-
