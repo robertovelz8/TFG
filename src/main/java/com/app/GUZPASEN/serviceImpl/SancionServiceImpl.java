@@ -136,4 +136,13 @@ public class SancionServiceImpl implements SancionService {
 			throw new ResourceNotFoundException("No se ha encontrado la sanción con id: " + id);
 		}
 	}
+
+	/**
+	 * Devuelve una lista con todas las sanciones registradas de un alumno.
+	 *
+	 * @return Lista de sanciones.
+	 */
+	public List<Sancion> getAllSancionesByAlumno(String dni) {
+		return sancionRepository.findByAlumnoDni(dni);
+	}
 }

@@ -48,4 +48,9 @@ public class SancionController {
 		sancionServiceImpl.deleteSancion(id);
 		return ResponseEntity.ok().build();
 	}
+
+	@GetMapping("/alumno/{dni}")
+	public ResponseEntity<List<Sancion>> getAllSancionesByAlumno (@PathVariable String dni) {
+		return new ResponseEntity<List<Sancion>>(sancionServiceImpl.getAllSancionesByAlumno(dni), HttpStatus.OK);
+	}
 }
