@@ -50,23 +50,27 @@ public class TareaServiceImpl implements TareaService {
 	 */
 	@Override
 	public Tarea createTarea(Tarea tarea) {
-		Tarea tareaGuardada = null;
-
 		Sancion sancionEncontrada = sancionRepository.findById(tarea.getSancion().getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No se ha encontrado la sanción con id: " + tarea.getSancion().getId()));
 
+		tarea.setSancion(sancionEncontrada);
+
+		if (tarea.getFechaCreacion() == null) {
+			tarea.setFechaCreacion(LocalDate.now());
+		}
+		if (tarea.getFechaLimite() == null) {
+			tarea.setFechaLimite(LocalDate.now().plusYears(1));
+		}
+
+		Tarea tareaGuardada = tareaRepository.save(tarea);
+
 		if (!sancionEncontrada.getTipoSancion().name().equals("SIN_EXPULSION")) {
-			if (tarea.getFechaCreacion() == null) tarea.setFechaCreacion(LocalDate.now());
-			if (tarea.getFechaLimite() == null) tarea.setFechaLimite(LocalDate.now().plusYears(1));
-
-			tarea.setSancion(sancionEncontrada);
-			tareaGuardada = tareaRepository.save(tarea);
-
 			notificacionController.notificarTareaTutorLegal(tareaGuardada);
 		}
 
 		return tareaGuardada;
 	}
+
 
 	/**
 	 * Obtiene una tarea por su identificador.

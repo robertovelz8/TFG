@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.GUZPASEN.DTOs.ParteDTO;
+import com.app.GUZPASEN.DTOs.TareaDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -65,7 +66,6 @@ public class Sancion {
 	 * Lista de tareas asignadas al alumno como parte de la sanción.
 	 */
 	@OneToMany(mappedBy = "sancion", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnore
 	private List<Tarea> tareas = new ArrayList<Tarea>();
 
 	/**
@@ -94,6 +94,15 @@ public class Sancion {
         }
         return null;
     }
+
+	@JsonProperty("tareas")
+	public List<TareaDTO> getTareasDTO() {
+		List<TareaDTO> tareasDTO = new ArrayList<TareaDTO>();
+		for(Tarea tarea: tareas) {
+			tareasDTO.add(new TareaDTO(tarea.getTitulo(), tarea.getDescripcion()));
+		}
+		return tareasDTO;
+	}
 
 	/**
 	 * Tipos de sanciones disponibles: con expulsión dentro, con expulsión fuera, o sin expulsión.

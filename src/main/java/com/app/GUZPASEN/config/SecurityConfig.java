@@ -44,7 +44,7 @@ public class SecurityConfig {
 
 	private RequestMatcher publicEndpoints() {
 		return new OrRequestMatcher(
-				new AntPathRequestMatcher("/guzpasen/conducta/**"),
+				//new AntPathRequestMatcher("/guzpasen/conducta/**"),
 				new AntPathRequestMatcher("/guzpasen/auth/**")
 				);
 	}
