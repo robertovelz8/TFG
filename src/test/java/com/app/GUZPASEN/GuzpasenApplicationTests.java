@@ -10,4 +10,10 @@ class GuzpasenApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void testMain() {
+		GuzpasenApplication.main(new String[] {});
+	}
+
+
 }

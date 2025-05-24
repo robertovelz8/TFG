@@ -79,7 +79,4 @@ public class Usuario implements UserDetails{
 	public String getPassword() {
 		return clave;
 	}
-
-	
-
 }

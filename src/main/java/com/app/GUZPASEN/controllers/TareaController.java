@@ -46,6 +46,7 @@ public class TareaController {
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<Void> deleteTarea (@PathVariable Long id) {
+		tareaServiceImpl.deleteTarea(id);
 		return ResponseEntity.ok().build();
 	}
 	

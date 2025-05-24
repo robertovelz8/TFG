@@ -63,7 +63,7 @@ public class Sancion {
 	private String duracion;
 
 	/**
-	 * Lista de tareas asignadas al alumno como parte de la sanción.
+	 * Lista de tareas asignadas al alumno coamo parte de la sanción.
 	 */
 	@OneToMany(mappedBy = "sancion", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Tarea> tareas = new ArrayList<Tarea>();

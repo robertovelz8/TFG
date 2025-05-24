@@ -15,10 +15,10 @@ import com.app.GUZPASEN.serviceImpl.NotificacionServiceImpl;
 public class NotificacionController {
 	
 	@Autowired
-	private AlumnoRepository alumnoRepository;
+    AlumnoRepository alumnoRepository;
 	
 	@Autowired
-	private NotificacionServiceImpl notificacionServiceImpl;
+    NotificacionServiceImpl notificacionServiceImpl;
 	
     public void notificarExpulsionTutorLegal(String dni) {
         Alumno alumno = alumnoRepository.findById(dni)

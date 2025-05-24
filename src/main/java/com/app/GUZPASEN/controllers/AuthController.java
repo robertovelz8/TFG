@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthController {
 	
 	@Autowired
-	private AuthService authService;
+    AuthService authService;
 	
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@RequestBody @Valid RegisterRequest request, BindingResult result) {
