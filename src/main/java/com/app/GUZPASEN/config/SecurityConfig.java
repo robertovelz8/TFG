@@ -15,6 +15,11 @@ import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -44,8 +49,8 @@ public class SecurityConfig {
 
 	private RequestMatcher publicEndpoints() {
 		return new OrRequestMatcher(
-				//new AntPathRequestMatcher("/guzpasen/conducta/**"),
 				new AntPathRequestMatcher("/guzpasen/auth/**")
-				);
+		);
 	}
+
 }
