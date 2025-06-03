@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS sancion (
     CONSTRAINT fk_sancion_alumno FOREIGN KEY (alumno) REFERENCES alumno(dni)
 );
 
-ALTER TABLE Parte ADD FOREIGN KEY (sancion_id) REFERENCES sancion(id);
+ALTER TABLE parte ADD FOREIGN KEY (sancion_id) REFERENCES sancion(id);
 
 -- Tabla Tarea
 CREATE TABLE IF NOT EXISTS tarea (
